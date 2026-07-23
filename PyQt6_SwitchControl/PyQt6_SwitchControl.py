@@ -203,3 +203,17 @@ class SwitchControl(QCheckBox):
 		if self.auto:
 			self.auto = False
 			self.start_animation(not self.isChecked())
+
+	def set_checked_instant(self, checked: bool):
+		self.animation.stop()
+		self.setChecked(checked)
+
+		vertical_padding = (self.height() - self.circle_size) // 2
+		if checked:
+			new_x = self.width() - (self.circle_size + 4)
+		else:
+			new_x = 3
+
+		self.__circle.move(new_x, vertical_padding)
+		self.__circle.update()
+		self.update()
